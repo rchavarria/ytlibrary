@@ -1,0 +1,48 @@
+/* youtubelib css stylesheet */
+
+h3 {
+    font-weight: bold;
+}
+
+#content {
+    width: 80%;
+    margin: 0 auto;
+}
+
+#left-column {
+    width: 25%;
+    border-radius: 4px;
+    border: solid gray 2px;
+    float: left;
+}
+
+#main-panel {
+    width: 60%;
+    float: left;
+}
+
+.main-panel-content {
+    width: 80%;
+    margin: 0 auto;
+}
+
+.clickable {
+    cursor: pointer;
+}
+
+.error {
+  margin: 20px 0;
+  padding: 15px 30px 15px 15px;
+  border-left: 5px solid #eee;
+  background-color: #fcf2f2;
+  border-color: #dFb5b4;
+}
+
+.video-thumbnail {
+    width: 128px;
+    height: 98px;
+    margin: 0 auto;
+    padding-top: 2px;
+    border: solid black 2px;
+    border-radius: 4px;
+}
