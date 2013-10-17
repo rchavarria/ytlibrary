@@ -8,7 +8,7 @@
         config(function ($sceDelegateProvider) {
             // allow AngularJS to access youtube, vimeo and localhost
             // for more info, check: http://blog.jongallant.com/2013/09/scedelegate-plicy-insecurl.html#.Ulq2BHiJQ9c
-            $sceDelegateProvider.resourceUrlWhitelist([/^(?:http(?:s)?:\/\/)?(?:[^\.]+\.)?\(vimeo|youtube\)\.com(\.*)?$/, 'self']);
+            $sceDelegateProvider.resourceUrlWhitelist([/\.*/]);
         });
 
     youtubelib.controller("LibraryCtrl", function ($scope, UserLibrary, YoutubeSearch) {
@@ -55,7 +55,8 @@
             };
 
             UserLibrary.addVideo(USER_NAME, video, function (library) {
-                $scope.library = library;
+                // workaround to update library while dragging&dropping videos to the list
+                $scope.$apply(function(scope) { scope.library = library; });
             });
         };
 

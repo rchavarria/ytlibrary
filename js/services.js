@@ -23,29 +23,40 @@
         }).
         // service to the backend, when the library handle happens
         factory("UserLibrary", function ($http) {
+            var library = {
+                name: "default",
+                videos: []
+            };
+
             return {
                 // returns the library of a user
                 getLibrary: function (user, readLibraryData) {
-                    $http.get("get_library.php?user=" + user).
-                        success(function (data) {
-                            readLibraryData(data);
-                        });
+                    console.log("returning library for user: " + user);
+                    readLibraryData(library);
                 },
 
                 // adds a video to a user's library
                 addVideo: function (user, video, readLibraryData) {
-                    $http.get("add_video.php?user=" + user + "&id=" + video.id + "&title=" + video.title).
-                        success(function (data) {
-                            readLibraryData(data);
-                        });
+                    library.videos.push( { 
+                        id: video.id,
+                        title: video.title
+                    });
+                    
+                    readLibraryData(library);
                 },
 
                 // removes a video from a user's library
                 removeVideo: function (user, videoId, readLibraryData) {
-                    $http.get("remove_video.php?user=" + user + "&id=" + videoId).
-                        success(function (data) {
-                            readLibraryData(data);
-                        });
+                    for(var i = 0, len = library.videos.length; i < len; i++) {
+                        var v = library.videos[i];
+
+                        if(v.id === videoId) {
+                            library.videos.splice(i, 1); //removes 'i'th element 
+                            break;
+                        }
+                    }
+
+                    readLibraryData(library);
                 }
             };
         });
